@@ -1,0 +1,20 @@
+Função BFS(grafo, ator_inicial, ator_final):
+    Se ator_final não estiver no grafo:
+        Lançar erro: "Esse ator não existe na base de dados"
+
+    Fila <- []
+    Inserir [ator_inicial] na Fila
+
+    Enquanto a Fila não estiver vazia:
+        Caminho <- Remover o primeiro elemento da Fila
+        Nodo <- Último elemento do Caminho
+
+        Se Nodo for igual a ator_final:
+            Retornar Caminho
+
+        Para cada adjacente em grafo[Nodo]:
+            Novo_Caminho <- Copiar Caminho
+            Adicionar adjacente ao Novo_Caminho
+            Inserir Novo_Caminho na Fila
+
+    Retornar Nulo
