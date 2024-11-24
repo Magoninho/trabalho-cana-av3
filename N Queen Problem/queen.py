@@ -1,3 +1,4 @@
+from board import *
 board = [
     [0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0],
@@ -100,5 +101,6 @@ def solve(board, col):
     return False   
 
 
-solve(board, 0)
-print_board(board)
+board = Board(4)
+board.solve()
+board.print_board()
