@@ -1,7 +1,7 @@
 import pygame
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height):
+    def __init__(self, width, height):
     
         super().__init__()
     
@@ -9,8 +9,8 @@ class Sprite(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (width, height))
 
         self.rect = self.image.get_rect()
+    
+    def draw(self, screen, x, y):
         self.rect.x = x
         self.rect.y = y
-
-
-queen_list = pygame.sprite.Group()
+        screen.blit(self.image, self.rect)

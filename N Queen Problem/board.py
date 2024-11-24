@@ -115,13 +115,19 @@ class Board:
         return False   
     # TODO: this function shouldn't even exist, its populating the memory in the while loop
     # TODO: update this with my minesweeper flag.py sprite
-    def update_queens(self):
-        for i in range(self.n):
-            for j in range(self.n):
-                if self.has_queen(i, j):
-                    sprite.queen_list.add(sprite.Sprite(j * TILESIZE + 5, i * TILESIZE + 5, TILESIZE - 10, TILESIZE - 10))
+    # def update_queens(self):
+    #     for i in range(self.n):
+    #         for j in range(self.n):
+    #             if self.has_queen(i, j):
+    #                 sprite.queen_list.add(sprite.Sprite(j * TILESIZE + 5, i * TILESIZE + 5, TILESIZE - 10, TILESIZE - 10))
 
                     
+    def update(self):
+        pass
+
+    def render(self, screen):
+        self.draw_board(screen)
+        pygame.draw.rect(screen, (255, 0, 0), (0, 0, 100, 100))
 
 
     def draw_board(self, screen):
