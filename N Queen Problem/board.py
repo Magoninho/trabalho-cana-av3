@@ -1,8 +1,8 @@
 import pygame
 import time
 from sprite import *
+from settings import *
 
-TILESIZE=64
 
 class Board:
     def __init__(self, n, queen_sprite):
@@ -110,7 +110,7 @@ class Board:
                 self.board[i][col] = 1
                 callback()
                 pygame.display.update()
-                time.sleep(0.1)
+                time.sleep(2**(-N)*16)
                 if self.solveUntilN(self.board, col + 1, callback) == True:
                     return True
                 # remove the queen
