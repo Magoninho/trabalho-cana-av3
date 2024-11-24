@@ -113,8 +113,9 @@ class Board:
                 self.board[i][col] = 0
         
         return False   
-    
-    def draw_queens(self):
+    # TODO: this function shouldn't even exist, its populating the memory in the while loop
+    # TODO: update this with my minesweeper flag.py sprite
+    def update_queens(self):
         for i in range(self.n):
             for j in range(self.n):
                 if self.has_queen(i, j):

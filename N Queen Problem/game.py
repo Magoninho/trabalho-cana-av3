@@ -28,7 +28,7 @@ while True:
     screen.fill((0, 0, 0))
 
     board.draw_board(screen)
-    board.draw_queens()
+    board.update_queens()
     queen_list.draw(screen)
 
     pygame.display.update()
