@@ -1,12 +1,15 @@
 import pygame
-import sprite
+import time
+from sprite import *
 
 TILESIZE=64
 
 class Board:
-    def __init__(self, n):
+    def __init__(self, n, queen_sprite):
         self.n = n
         self.board = self.generate_board()
+        self.queen_sprite = queen_sprite
+        self.enter_pressed = False
 
     def generate_board(self):
         board = []
@@ -91,11 +94,11 @@ class Board:
 
         return True
     
-    def solve(self):
-        self.solveUntilN(self.board, 0)
+    def solve(self, callback):
+        self.solveUntilN(self.board, 0, callback)
         
     
-    def solveUntilN(self, board, col):
+    def solveUntilN(self, board, col, callback):
 
         if col >= self.n:
             return True
@@ -105,32 +108,49 @@ class Board:
             # if its safe
             if self.is_safe(i, col):
                 self.board[i][col] = 1
-                self.print_board()
-                print()
-                if self.solveUntilN(self.board, col + 1) == True:
+                callback()
+                pygame.display.update()
+                time.sleep(0.1)
+                if self.solveUntilN(self.board, col + 1, callback) == True:
                     return True
                 # remove the queen
                 self.board[i][col] = 0
         
         return False   
-    # TODO: this function shouldn't even exist, its populating the memory in the while loop
-    # TODO: update this with my minesweeper flag.py sprite
-    # def update_queens(self):
-    #     for i in range(self.n):
-    #         for j in range(self.n):
-    #             if self.has_queen(i, j):
-    #                 sprite.queen_list.add(sprite.Sprite(j * TILESIZE + 5, i * TILESIZE + 5, TILESIZE - 10, TILESIZE - 10))
 
+    def user_input(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_RETURN] and not self.enter_pressed:
+            print('apertou enter')
+            self.enter_pressed = True
+        
+        if not keys[pygame.K_RETURN] and self.enter_pressed:
+            self.enter_pressed = False
+        
                     
     def update(self):
         pass
 
+
     def render(self, screen):
+
         self.draw_board(screen)
-        pygame.draw.rect(screen, (255, 0, 0), (0, 0, 100, 100))
 
-
+        
+    def draw_queen_on_spot(self, screen, i, j):
+        self.queen_sprite.draw(screen, i * TILESIZE + 5, j * TILESIZE + 5)
+    
+    # draws the current board state
     def draw_board(self, screen):
+        self.draw_tiles(screen)
+
+        for row in range(self.n):
+            for col in range(self.n):
+                if self.has_queen(row, col):
+                    self.draw_queen_on_spot(screen, row, col)
+
+    def draw_tiles(self, screen):
         for i in range(self.n):
             for j in range(self.n):
                 color = (240, 217, 181) if (i + j) % 2 == 0 else (181, 136, 99)

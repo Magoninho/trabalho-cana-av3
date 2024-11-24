@@ -2,17 +2,18 @@ import pygame
 from board import *
 from sprite import *
 
+pygame.init()
 TILESIZE = 64
-n = 4
+n = 8
 width = n*TILESIZE
 height = n*TILESIZE
 screen = pygame.display.set_mode((width, height))
 
 pygame.display.set_caption("N queen problem")
 
-board = Board(n)
-# queen = Sprite(5, 5, TILESIZE - 10, TILESIZE - 10)
 queen_sprite = Sprite(TILESIZE - 10, TILESIZE - 10)
+board = Board(n, queen_sprite)
+board.solve(lambda: board.render(screen))
 
 while True:
     for event in pygame.event.get():
@@ -25,9 +26,7 @@ while True:
                 pygame.quit()
                 exit()
     
-    screen.fill((0, 0, 0))
-
     board.update()
-    board.render(screen)
+
 
     pygame.display.update()
