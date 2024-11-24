@@ -1,14 +1,21 @@
 board = [
-    [1, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
 ]
 
-def has_queen(row, col):
+N = len(board)
+
+def print_board(board):
+    for line in board:
+        print(line)
+
+def has_queen(board, row, col):
     return board[row][col] == 1
 
-def is_safe(row, col):
+def is_safe(board, row, col):
     # 1. check if there is queen in row
     # 2. check if there is queen in col
     # 3. check if there is queen in diagonal
@@ -17,22 +24,22 @@ def is_safe(row, col):
     # ROW CHECK
     # 1. check left positions
     for c in range(col - 1, -1, -1):
-        if has_queen(row, c):
+        if has_queen(board, row, c):
             return False
     # 2. check right positions
     for c in range(col + 1, len(board[0])):
-        if has_queen(row, c):
+        if has_queen(board, row, c):
             return False
     
     # COLUMN CHECK
     # check top positions
     for r in range(row - 1, -1, -1):
-        if has_queen(r, col):
+        if has_queen(board, r, col):
             return False
 
     # check bottom positions
     for r in range(row + 1, len(board)):
-        if has_queen(r, col):
+        if has_queen(board, r, col):
             return False
 
     # FIRST DIAGONAL
@@ -40,7 +47,7 @@ def is_safe(row, col):
     i = row - 1
     j = col - 1
     while i >= 0 and j >= 0:
-        if has_queen(i, j):
+        if has_queen(board, i, j):
             return False
         i -= 1
         j -= 1
@@ -49,7 +56,7 @@ def is_safe(row, col):
     i = row + 1
     j = col + 1
     while i < len(board) and j < len(board):
-        if has_queen(i, j):
+        if has_queen(board, i, j):
             return False
         i += 1
         j += 1    
@@ -59,7 +66,7 @@ def is_safe(row, col):
     i = row - 1
     j = col + 1
     while i >= 0 and j < len(board):
-        if has_queen(i, j):
+        if has_queen(board, i, j):
             return False
         i -= 1
         j += 1
@@ -68,10 +75,30 @@ def is_safe(row, col):
     i = row + 1
     j = col - 1
     while j >= 0 and i < len(board):
-        if has_queen(i, j):
+        if has_queen(board, i, j):
             return False
         i += 1
         j -= 1
 
     return True
 
+def solve(board, col):
+
+    if col >= N:
+        return True
+    
+    # looping trough rows and placing queens
+    for i in range(N):
+        # if its safe
+        if is_safe(board, i, col):
+            board[i][col] = 1
+            if solve(board, col + 1) == True:
+                return True
+            # remove the queen
+            board[i][col] = 0
+    
+    return False   
+
+
+solve(board, 0)
+print_board(board)
