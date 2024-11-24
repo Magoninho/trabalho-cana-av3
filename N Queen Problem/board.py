@@ -1,3 +1,5 @@
+import pygame
+TILESIZE=64
 class Board:
     def __init__(self, n):
         self.n = n
@@ -108,3 +110,10 @@ class Board:
                 board[i][col] = 0
         
         return False   
+
+    def draw_board(self, screen):
+        for i in range(self.n):
+            for j in range(self.n):
+                color = (240, 217, 181) if (i + j) % 2 == 0 else (181, 136, 99)
+                pygame.draw.rect(screen, color, (i * TILESIZE, j * TILESIZE, TILESIZE, TILESIZE))
+            
