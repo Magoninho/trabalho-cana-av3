@@ -10,6 +10,7 @@ class Board:
         self.board = self.generate_board()
         self.queen_sprite = queen_sprite
         self.enter_pressed = False
+        self.solved = False
 
     def generate_board(self):
         board = []
@@ -101,6 +102,9 @@ class Board:
     def solveUntilN(self, board, col, callback):
 
         if col >= self.n:
+            self.solved = True
+            callback()
+            pygame.display.update()
             return True
         
         # looping trough rows and placing queens
@@ -153,6 +157,10 @@ class Board:
     def draw_tiles(self, screen):
         for i in range(self.n):
             for j in range(self.n):
-                color = (240, 217, 181) if (i + j) % 2 == 0 else (181, 136, 99)
+                if self.solved:
+                    color = (240, 255, 181) if (i + j) % 2 == 0 else (181, 255, 99)
+                else:
+                    color = (240, 217, 181) if (i + j) % 2 == 0 else (181, 136, 99)
+                    
                 pygame.draw.rect(screen, color, (i * TILESIZE, j * TILESIZE, TILESIZE, TILESIZE))
             
