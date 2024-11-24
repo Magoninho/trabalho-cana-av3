@@ -11,11 +11,9 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("N queen problem")
 
 board = Board(n)
-queen = Sprite(5, 5, TILESIZE - 10, TILESIZE - 10)
+# queen = Sprite(5, 5, TILESIZE - 10, TILESIZE - 10)
 
-queen_list = pygame.sprite.Group()
-queen_list.add(queen)
-
+board.solve()
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -30,6 +28,7 @@ while True:
     screen.fill((0, 0, 0))
 
     board.draw_board(screen)
+    board.draw_queens()
     queen_list.draw(screen)
 
     pygame.display.update()

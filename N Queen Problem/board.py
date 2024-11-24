@@ -1,4 +1,5 @@
 import pygame
+import sprite
 
 TILESIZE=64
 
@@ -117,7 +118,9 @@ class Board:
         for i in range(self.n):
             for j in range(self.n):
                 if self.has_queen(i, j):
-                    pass
+                    sprite.queen_list.add(sprite.Sprite(j * TILESIZE + 5, i * TILESIZE + 5, TILESIZE - 10, TILESIZE - 10))
+
+                    
 
 
     def draw_board(self, screen):
