@@ -33,4 +33,3 @@ while True:
     queen_list.draw(screen)
 
     pygame.display.update()
-        

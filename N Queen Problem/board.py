@@ -1,5 +1,7 @@
 import pygame
+
 TILESIZE=64
+
 class Board:
     def __init__(self, n):
         self.n = n
@@ -14,14 +16,14 @@ class Board:
         
         return board
 
-    def has_queen(self, board, row, col):
+    def has_queen(self, row, col):
         return self.board[row][col] == 1
 
     def print_board(self):
         for line in self.board:
             print(line)
 
-    def is_safe(self, board, row, col):
+    def is_safe(self, row, col):
         # 1. check if there is queen in row
         # 2. check if there is queen in col
         # 3. check if there is queen in diagonal
@@ -30,22 +32,22 @@ class Board:
         # ROW CHECK
         # 1. check left positions
         for c in range(col - 1, -1, -1):
-            if self.has_queen(self.board, row, c):
+            if self.has_queen(row, c):
                 return False
         # 2. check right positions
         for c in range(col + 1, len(self.board[0])):
-            if self.has_queen(self.board, row, c):
+            if self.has_queen(row, c):
                 return False
         
         # COLUMN CHECK
         # check top positions
         for r in range(row - 1, -1, -1):
-            if self.has_queen(self.board, r, col):
+            if self.has_queen(r, col):
                 return False
 
         # check bottom positions
         for r in range(row + 1, len(self.board)):
-            if self.has_queen(self.board, r, col):
+            if self.has_queen(r, col):
                 return False
 
         # FIRST DIAGONAL
@@ -53,7 +55,7 @@ class Board:
         i = row - 1
         j = col - 1
         while i >= 0 and j >= 0:
-            if self.has_queen(self.board, i, j):
+            if self.has_queen(i, j):
                 return False
             i -= 1
             j -= 1
@@ -62,7 +64,7 @@ class Board:
         i = row + 1
         j = col + 1
         while i < len(self.board) and j < len(self.board):
-            if self.has_queen(self.board, i, j):
+            if self.has_queen(i, j):
                 return False
             i += 1
             j += 1    
@@ -72,7 +74,7 @@ class Board:
         i = row - 1
         j = col + 1
         while i >= 0 and j < len(self.board):
-            if self.has_queen(self.board, i, j):
+            if self.has_queen(i, j):
                 return False
             i -= 1
             j += 1
@@ -81,7 +83,7 @@ class Board:
         i = row + 1
         j = col - 1
         while j >= 0 and i < len(self.board):
-            if self.has_queen(self.board, i, j):
+            if self.has_queen(i, j):
                 return False
             i += 1
             j -= 1
@@ -100,16 +102,23 @@ class Board:
         # looping trough rows and placing queens
         for i in range(self.n):
             # if its safe
-            if self.is_safe(board, i, col):
-                board[i][col] = 1
+            if self.is_safe(i, col):
+                self.board[i][col] = 1
                 self.print_board()
                 print()
-                if self.solveUntilN(board, col + 1) == True:
+                if self.solveUntilN(self.board, col + 1) == True:
                     return True
                 # remove the queen
-                board[i][col] = 0
+                self.board[i][col] = 0
         
         return False   
+    
+    def draw_queens(self):
+        for i in range(self.n):
+            for j in range(self.n):
+                if self.has_queen(i, j):
+                    pass
+
 
     def draw_board(self, screen):
         for i in range(self.n):
