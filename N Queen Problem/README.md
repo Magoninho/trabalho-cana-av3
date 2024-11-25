@@ -1,7 +1,7 @@
 # O problema das N damas
 _Por João Felipe Ribeiro_
 
-![demo](image-1.png)
+![demo](image-1.png)  
 <sup>_Exemplo de um tabuleiro com as damas posicionadas (n=8)_</sup>
 
 <br/>

@@ -1,7 +1,7 @@
 # Os Seis Graus de Kevin Bacon
 _Por João Felipe Ribeiro_  
 _24/11/2024_
-![demo](image-1.png)
+![demo](image-1.png)  
 <sup>_Exemplo uma saída do programa_</sup>
 
 ## Introdução
