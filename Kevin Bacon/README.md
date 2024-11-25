@@ -13,7 +13,7 @@ Os "Seis Graus de Kevin Bacon" são um conceito inspirado pela teoria dos "seis 
 Na implementação da ideia as relações entre os atores pode ser descrita como um grafo não direcionado. A estrutura de dados interliga os atores ao seus filmes e outros atores, permitindo que um caminho seja traçado entre eles.
 
 
-![diagram](image.png)
+![diagram](image.png)  
 <sup>_Grafo não direcionado que interliga os filmes e os atores_</sup>
 
 Para realizar a busca do caminho entre os atores, utiliza-se um algoritmo **guloso** para encontrar o primeiro melhor e mais curto caminho entre eles.

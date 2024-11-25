@@ -18,7 +18,7 @@ Dado um tabuleiro de Xadrez N x N, em quais casas podemos posicionar N rainhas s
 
 Para resolver esse problema, é necessário implementar um algoritmo recursivo de **tentativa e erro** (Backtracking) para econtrar a solução. Como mostrado nesta imagem, temos uma árvore de recursão que mostra todas as tentativas de alocar as N rainhas no tabuleiro.
 
-![diagram](image.png)
+![diagram](image.png)  
 <sup>_Fonte: GeeksForGeeks_</sup>
 
 Esta é a função recursiva que resolve o tabuleiro:
