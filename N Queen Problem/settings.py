@@ -1,2 +1,2 @@
 TILESIZE = 64
-N = 4
+N = 8
